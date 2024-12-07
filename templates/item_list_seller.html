@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}My Items{% endblock title %}
+{% block content %}
+<h1>My Items</h1>
+<ul>
+    {% for item in object_list %}
+        <li><a href="{% url 'item_detail' item.id %}">{{ item.title }}</a></li>
+    {% endfor %}
+</ul>
+<p><a href="{% url 'item_create' %}">Add New Item</a></p>
+{% endblock content %}

@@ -1,12 +1,20 @@
 {% extends 'base.html' %}
 {% block title %}Home{% endblock title %}
 {% block content %}
+<h1>Welcome to Ecom</h1>
 {% if user.is_authenticated %}
-Hi {{ user.username }}!
-<p><a href="{% url 'logout' %}">Log Out</a></p>
+    <p>Hi {{ user.username }}!</p>
+    <p><a href="{% url 'logout' %}">Log Out</a></p>
+    {% if user.is_seller %}
+        <h2>Seller Options</h2>
+        <ul>
+            <li><a href="{% url 'item_list' %}">View Items</a></li>
+            <li><a href="{% url 'item_create' %}">Create Item</a></li>
+        </ul>
+    {% endif %}
 {% else %}
-<p>You are not logged in</p>
-<a href="{% url 'login' %}">Log In</a> |
-<a href="{% url 'signup' %}">Sign Up</a>
+    <p>You are not logged in.</p>
+    <a href="{% url 'login' %}">Log In</a> |
+    <a href="{% url 'signup' %}">Sign Up</a>
 {% endif %}
 {% endblock content %}

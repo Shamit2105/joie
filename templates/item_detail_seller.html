@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Item Detail{% endblock title %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>{{ object.title }}</h1>
+        <p><strong>Description:</strong> {{ object.description }}</p>
+        <p><strong>Price:</strong> ${{ object.price }}</p>
+        <p><strong>Available Stock:</strong> {{ object.quantity }}</p>
+        <a href="{% url 'item_update' object.id %}" class="btn btn-warning">Edit</a>
+        <a href="{% url 'item_delete' object.id %}" class="btn btn-danger">Delete</a>
+        <a href="{% url 'item_list' %}" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>
+{% endblock content %}

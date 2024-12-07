@@ -1,28 +1,26 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, DetailView, FormView
-from django.views.generic.edit import UpdateView, DeleteView, CreateView
-from django.urls import reverse_lazy, reverse  # new
+from django.views.generic import ListView, DetailView, CreateView
 from .models import Item
 from .forms import ItemForm
 
-class ItemListView(ListView):
+class ItemListView(LoginRequiredMixin, ListView):
     model = Item
     template_name = "item_list_seller.html"
 
-class ItemDetailView(DetailView):
+    def get_queryset(self):
+        if self.request.user.is_seller:
+            return Item.objects.filter(seller=self.request.user)
+        return Item.objects.none()
+
+class ItemDetailView(LoginRequiredMixin, DetailView):
     model = Item
     template_name = "item_detail_seller.html"
 
-class ItemCreateView(CreateView):
+class ItemCreateView(LoginRequiredMixin, CreateView):
     model = Item
+    form_class = ItemForm
     template_name = "item_create_seller.html"
-    fields = (
-        "title",
-        "description",
-        "price",
-        "quantity"
-    )
 
     def form_valid(self, form):
-        form.instance.author = self.request.user
+        form.instance.seller = self.request.user
         return super().form_valid(form)
