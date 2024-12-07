@@ -11,6 +11,10 @@
             <li><a href="{% url 'item_list' %}">View Items</a></li>
             <li><a href="{% url 'item_create' %}">Create Item</a></li>
         </ul>
+    {% else %}
+    <h2>Customer Options</h2>
+    <ul>
+        <li><a href="{% url 'customer_home' %}">View Items</a></li>
     {% endif %}
 {% else %}
     <p>You are not logged in.</p>
