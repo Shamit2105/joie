@@ -22,6 +22,7 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
     model = Item
     form_class = ItemForm
     template_name = "item_create_seller.html"
+    success_url = reverse_lazy('item_list')
 
     def form_valid(self, form):
         form.instance.seller = self.request.user
