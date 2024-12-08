@@ -48,7 +48,7 @@ class PlaceOrderView(FormView):
         order.save()
 
         # Update item stock
-        item.quantity -= quantity
+        
         item.save()
 
         # Redirect to success page
