@@ -4,7 +4,6 @@
 <h1>Welcome to Ecom</h1>
 {% if user.is_authenticated %}
     <p>Hi {{ user.username }}!</p>
-    <p><a href="{% url 'logout' %}">Log Out</a></p>
     {% if user.is_seller %}
         <h2>Seller Options</h2>
         <ul>
